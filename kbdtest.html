@@ -1,0 +1,62 @@
+<html>
+<head>
+<title> Testing group button behaviour</title>
+<script type="text/javascript">
+    window.onload = function () {
+ 	document.frmkeyboard.txtexpression.value = "";
+        var isFireFox = function () {
+            return navigator.userAgent.indexOf("Firefox") > 0 ? true : false;
+        }
+ 
+        var clickHandler = function (index) {
+            //handle click event here
+            alert("you clicked button"+index);
+            if (index == 1){
+		document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[\\epsilon\\]";
+	    }
+            else if(index == 2){
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[\\leq\\]";
+	    }
+        }
+ 
+        var btnGroup = document.getElementById("btnGroup");
+ 
+        btnGroup.addEventListener("click", function (event) {
+ 
+            var targetId;
+            if (isFireFox()) {
+                //for Firefox
+                targetId = event.target.id;
+		alert(targetId);
+            }
+            else {
+                //For IE, Chrome
+                targetId = event.srcElement.id;
+		alert(targetId);
+            }
+ 
+            var index = targetId.slice(6);
+            clickHandler(index);
+ 
+
+ 
+        });
+    }
+</script>
+</head>
+<body>
+<form name='frmkeyboard' method='POST'>
+    <textarea name='txtexpression' rows='8' cols='20'></textarea>
+    <div id="btnGroup">
+        <input id="Button1" type="button" value="epsilon" /><br />
+        <input id="Button2" type="button" value="<=" /><br />
+        <input id="Button3" type="button" value="button3" /><br />
+        <input id="Button4" type="button" value="button4" /><br />
+        <input id="Button5" type="button" value="button5" /><br />
+        <input id="Button6" type="button" value="button6" /><br />
+        <input id="Button7" type="button" value="button7" /><br />
+        <input id="Button8" type="button" value="button8" /></div>
+
+</form>
+</body>
+</html>
