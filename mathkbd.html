@@ -661,6 +661,80 @@ function addmultiintegrallimit(n){
             else if(index == 197){
                 document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\tanh ";
 	    }
+
+            else if(index == 198){
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\lim ";
+	    }
+            else if(index == 199){
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\log ";
+	    }
+            else if(index == 200){
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\ln ";
+	    }
+            else if(index == 201){
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\deg ";
+	    }
+            else if(index == 202){
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\exp ";
+	    }
+            else if(index == 203){
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\rightarrow ";
+	    }
+            else if(index == 204){
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\angle ";
+	    }
+            else if(index == 205){
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\sup ";
+	    }
+            else if(index == 206){
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\limsup ";
+	    }
+            else if(index == 207){
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\det ";
+	    }
+            else if(index == 208){
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\dim ";
+	    }
+            else if(index == 209){
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\arg ";
+	    }
+
+            else if(index == 210){
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "^";
+	    }
+            else if(index == 211){
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\tilde ";
+	    }
+            else if(index == 212){
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\cdots ";
+	    }
+            else if(index == 213){
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\ldots ";
+	    }
+            else if(index == 214){
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\vdots ";
+	    }
+            else if(index == 215){
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\ddots ";
+	    }
+            else if(index == 216){
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\asymp ";
+	    }
+            else if(index == 217){
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\models ";
+	    }
+            else if(index == 218){
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\bullet ";
+	    }
+            else if(index == 219){
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\Join ";
+	    }
+            else if(index == 220){
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\ni ";
+	    }
+            else if(index == 221){
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\mid ";
+	    }
         }
  
         var btnGroup = document.getElementById("btnGroup");
@@ -772,6 +846,18 @@ function addmultiintegrallimit(n){
 
 <!-- ...More More More Math symbols -->
 <tr><td><input id="Button192" type="button" value="cot" /></td><td><input id="Button193" type="button" value="cosec" /></td><td><input id="Button194" type="button" value="sec" /></td><td><input id="Button195" type="button" value="cosh" /></td><td><input id="Button196" type="button" value="sinh" /></td><td><input id="Button197" type="button" value="tanh" /></td></tr>
+
+<!-- ...and it continues... -->
+<tr><td><input id="Button198" type="button" value="limit" /></td><td><input id="Button203" type="button" value="tends to" /></td><td><input id="Button199" type="button" value="log (base10)" /></td><td><input id="Button200" type="button" value="log (natural)" /></td><td><input id="Button201" type="button" value="degrees" /></td><td><input id="Button202" type="button" value="exponential" /></td></tr>
+
+<tr><td colspan=6>&nbsp;</td></tr>
+<!-- ...and now some math utility symbols... -->
+<tr><td><input id="Button204" type="button" value="angle" /></td><td><input id="Button205" type="button" value="superscript" /></td><td><input id="Button206" type="button" value="limsup" /></td><td><input id="Button207" type="button" value="determinant" /></td><td><input id="Button208" type="button" value="dimension" /></td><td><input id="Button209" type="button" value="argument" /></td></tr>
+
+<!-- ...More meta math -->
+<tr><td><input id="Button210" type="button" value="to the power" /></td><td><input id="Button211" type="button" value="tilde" /></td><td><input id="Button212" type="button" value="cdots" /></td><td><input id="Button213" type="button" value="ldots" /></td><td><input id="Button214" type="button" value="vdots" /></td><td><input id="Button215" type="button" value="ddots" /></td></tr>
+
+<tr><td><input id="Button216" type="button" value="asymptotic" /></td><td><input id="Button217" type="button" value="models" /></td><td><input id="Button218" type="button" value="bullet" /></td><td><input id="Button219" type="button" value="join" /></td><td><input id="Button220" type="button" value="not in" /></td><td><input id="Button221" type="button" value="mid" /></td></tr>
 
  </table>       
  </div>
