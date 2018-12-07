@@ -2,7 +2,7 @@
 <html>
 <head>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/3.6.0/math.min.js"></script>
+<script type="text/javascript" src="MathJax/math.min.js"></script>
 <script type="text/javascript" async src="MathJax/MathJax.js?config=TeX-MML-AM_CHTML">
 </script>
 
@@ -18,12 +18,21 @@ function saveContents(){
 
 
 function displayMathExpr(){
+    start_square_bracket_pattern = new RegExp("^\\[");
+    end_square_bracket_pattern = new RegExp("\\]$");
     txtContents = document.frmkeyboard.txtexpression.value;
+    if(!start_square_bracket_pattern.test(txtContents)){
+        txtContents = "\\[" + txtContents;
+    }
+    if(!end_square_bracket_pattern.test(txtContents)){
+        txtContents = txtContents + "\\]";
+    }
     //alert(txtContents);
     mathexprdiv = document.getElementById('mathexpr');
     mathexprdiv.innerHTML = txtContents; 
     MathJax.Hub.Queue(['Typeset', MathJax.Hub, mathexprdiv]);
     //// Now, add the form submission button with the javascript code to handle the 'POST'-ing of entered data.
+    //document.frmkeyboard.exoticsymbols.value = expr;
     //savebutton = document.createElement("input");
     //savebutton.type = "button";
     //savebutton.name = "btnSave";
@@ -53,11 +62,12 @@ function addintegrallimits(){
         //alert("Only 2 values are required. We will take the first 2");
         lowelim = limitsparts[0];
         upperlim = limitsparts[1];
-        document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[\\int\\limits_" + lowelim + "^" + upperlim + " \\]";
+        document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\int\\limits_" + lowelim + "^" + upperlim;
     }
     else{
-        alert("Invalid input. Please try again.");
-        return null;
+        //alert("Invalid input. Please try again.");
+        document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\int";
+        //return null;
     }
 }
 
@@ -65,17 +75,17 @@ function addmultiintegrallimit(n){
     var limitvar = prompt("Please enter limit variable:");
     //alert(limits);
     if(n == 2){
-        document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[\\iint_" + limitvar + " \\]";
+        document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\iint_" + limitvar;
     }
     else if(n == 3){
-        document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[\\iiint_" + limitvar + " \\]";
+        document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\iiint_" + limitvar;
     }
     else if(n == 0){
-        document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[\\oint_" + limitvar + " \\]";
+        document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\oint_" + limitvar;
     }
     else if(n == 20){
         alert(n);
-        document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[\\oiint_" + limitvar + " \\]";
+        document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\oiint_" + limitvar;
     }
 }
 
@@ -92,44 +102,62 @@ function addmultiintegrallimit(n){
             //handling click event here
             //alert("you clicked button"+index);
             if (index == 1){
-		document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[\\epsilon\\]";
+		document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\epsilon";
 	    }
             else if(index == 2){
-                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[\\leq\\]";
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\leq";
 	    }
             else if(index == 3){
-                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\( \\mathcal{T} \\)";
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + " \\mathcal{T} ";
 	    }
             else if(index == 4){
-                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[\\mathcal{B}\\]";
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\mathcal{B}";
 	    }
             else if(index == 5){
-                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[B\\]";
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "B";
 	    }
             //else if(index == 111){
             //    document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\_\\{\\alpha\\}";
             //}
             
             else if(index == 6){
-                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[\\mathtt{x^2}\\]";
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\mathtt{x^2}";
 	    }
             else if(index == 7){
-                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[\\in \\]";
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\in ";
 	    }
             else if(index == 8){
-                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[{\\subset} \\]";
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\equiv";
 	    }
             else if(index == 9){
-                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[\\mp\\]";
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\mp";
 	    }
             else if(index == 10){
-                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[\\sum\\]";
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\sum";
 	    }
             else if(index == 11){
-                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[\\propto\\]";
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\propto";
 	    }
             else if(index == 12){
-                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[\\infty\\]";
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\infty";
+	    }
+            else if(index == 137){
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\perp";
+	    }
+            else if(index == 138){
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\parallel";
+	    }
+            else if(index == 140){
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\sim";
+	    }
+            else if(index == 143){
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\approx";
+	    }
+            else if(index == 146){
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\cong";
+	    }
+            else if(index == 147){
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\neq";
 	    }
             // ASCII characters below:
             else if(index == 13){
@@ -323,152 +351,152 @@ function addmultiintegrallimit(n){
 	    }
             // Greek Characters: Lowercase
             else if(index == 75){
-                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[\\alpha\\]";
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\alpha";
 	    }
             else if(index == 76){
-                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[\\beta\\]";
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\beta";
 	    }
             else if(index == 77){
-                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[\\gamma\\]";
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\gamma";
 	    }
             else if(index == 78){
-                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[\\rho\\]";
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\rho";
 	    }
             else if(index == 79){
-                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[\\sigma\\]";
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\sigma";
 	    }
             else if(index == 80){
-                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[\\delta\\]";
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\delta";
 	    }
             else if(index == 113){
-                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[\\mu\\]";
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\mu";
 	    }
             else if(index == 114){
-                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[\\lambda\\]";
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\lambda";
 	    }
             else if(index == 115){
-                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[\\theta\\]";
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\theta";
 	    }
             else if(index == 116){
-                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[\\kappa\\]";
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\kappa";
 	    }
             else if(index == 117){
-                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[\\iota\\]";
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\iota";
 	    }
             else if(index == 118){
-                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[\\zeta\\]";
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\zeta";
 	    }
             else if(index == 125){
-                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[\\eta\\]";
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\eta";
 	    }
             else if(index == 126){
-                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[\\chi\\]";
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\chi";
 	    }
             else if(index == 127){
-                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[\\psi\\]";
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\psi";
 	    }
             else if(index == 128){
-                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[\\xi\\]";
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\xi";
 	    }
             else if(index == 129){
-                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[\\phi\\]";
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\phi";
 	    }
             else if(index == 130){
-                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[\\omega\\]";
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\omega";
 	    }
             // Math symbols
             else if(index == 81){
-                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[\\pm\\]";
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\pm";
 	    }
             else if(index == 82){
-                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[\\times\\]";
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\times";
 	    }
             else if(index == 83){
-                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[\\cdot\\]";
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\cdot";
 	    }
             else if(index == 84){
-                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[\\div\\]";
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\div";
 	    }
             else if(index == 85){
-                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[\\surd\\]";
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\surd";
 	    }
             else if(index == 86){
-                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[\\sqrt\\]";
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\sqrt";
 	    }
             else if(index == 87){
-                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[\\bigcup\\]";
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\bigcup";
 	    }
             //else if(index == 88){
-            //    document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[\\int\\]";
+            //    document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\int";
 	    //}
             else if(index == 89){
                 document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "dx";
 	    }
             //else if(index == 90){
-            //    document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[\\iint\\]";
+            //    document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\iint";
 	    //}
             //else if(index == 91){
-            //    document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[\\iiint\\]";
+            //    document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\iiint";
 	    //}
             //else if(index == 92){
-            //    document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[\\oint\\]";
+            //    document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\oint";
 	    //}
             //else if(index == 167){
-            //    document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[\\oiint\\]";
+            //    document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\oiint";
 	    //}
             else if(index == 93){
-                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[\\ne\\]";
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\ne";
 	    }
             else if(index == 94){
-                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[\\approx\\]";
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\approx";
 	    }
             else if(index == 95){
-                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[\\sim\\]";
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\sim";
 	    }
             else if(index == 96){
-                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[\\leftrightarrow\\]";
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\leftrightarrow";
 	    }
             else if(index == 97){
-                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[\\ll\\]";
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\ll";
 	    }
             else if(index == 98){
-                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[\\gg\\]";
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\gg";
 	    }
             else if(index == 99){
-                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[\\le\\]";
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\le";
 	    }
             else if(index == 100){
-                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[\\ge\\]";
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\ge";
 	    }
             else if(index == 101){
-                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[\\supset\\]";
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\supset";
 	    }
             else if(index == 102){
-                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[\\subseteq\\]";
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\subseteq";
 	    }
             else if(index == 103){
-                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[\\subset\\]";
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\subset";
 	    }
             else if(index == 104){
-                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[\\supseteq\\]";
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\supseteq";
 	    }
             else if(index == 105){
-                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[\\bar{a}\\]";
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\bar{a}";
 	    }
             else if(index == 106){
-                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[\\hat a\\]";
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\hat a";
 	    }
             else if(index == 107){
-                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[\\dot{\\,}\\]";
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\dot{\\,}";
 	    }
             else if(index == 108){
-                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[\\forall\\]";
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\forall";
 	    }
             else if(index == 109){
-                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[\\partial\\]";
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\partial";
 	    }
             else if(index == 110){
-                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[\\exists\\]";
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\exists";
 	    }
             else if(index == 119){
                 document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "(";
@@ -490,113 +518,107 @@ function addmultiintegrallimit(n){
 	    }
             // Punctuation: comma, semicolon, etc.
             else if(index == 131){
-                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[,\\]";
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + ",";
 	    }
             else if(index == 132){
-                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[;\\]";
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + ";";
 	    }
             else if(index == 133){
-                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[.\\]";
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + ".";
 	    }
             else if(index == 134){
-                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\['\\]";
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "'";
 	    }
             else if(index == 135){
-                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[\"\\]";
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\"";
 	    }
             else if(index == 136){
-                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[:\\]";
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + ":";
 	    }
             // Greek characters: Uppercase
-            else if(index == 137){
-                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[A\\]";
-	    }
-            else if(index == 138){
-                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[B\\]";
-	    }
             else if(index == 139){
-                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[\\Gamma\\]";
-	    }
-            else if(index == 140){
-                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[P\\]";
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\Gamma";
 	    }
             else if(index == 141){
-                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[\\Sigma\\]";
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\Sigma";
 	    }
             else if(index == 142){
-                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[\\Delta\\]";
-	    }
-            else if(index == 143){
-                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[M\\]";
-	    }
-            else if(index == 144){
-                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[\\Lambda\\]";
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\Delta";
 	    }
             else if(index == 145){
-                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[\\Theta\\]";
-	    }
-            else if(index == 146){
-                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[K\\]";
-	    }
-            else if(index == 147){
-                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[I\\]";
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\Theta";
 	    }
             else if(index == 148){
-                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[Z\\]";
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\Upsilon";
 	    }
             else if(index == 149){
-                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[H\\]";
-	    }
-            else if(index == 150){
-                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[X\\]";
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\Pi";
 	    }
             else if(index == 151){
-                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[\\Psi\\]";
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\Psi";
 	    }
             else if(index == 152){
-                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[\\Xi\\]";
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\Xi";
 	    }
             else if(index == 153){
-                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[\\Phi\\]";
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\Phi";
 	    }
             else if(index == 154){
-                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[\\Omega\\]";
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\Omega";
 	    }
             else if(index == 155){
-                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[\\epsilon\\]";
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\epsilon";
 	    }
             else if(index == 156){
-                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[\\pi\\]";
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\pi";
 	    }
             else if(index == 157){
-                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[\\tau\\]";
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\tau";
 	    }
             else if(index == 158){
-                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[\\upsilon\\]";
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\upsilon";
 	    }
             else if(index == 159){
-                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[\\nu\\]";
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\nu";
 	    }
             else if(index == 160){
-                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[o\\]";
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "o";
 	    }
             else if(index == 161){
-                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[\\varepsilon\\]";
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\varepsilon";
 	    }
             else if(index == 162){
-                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[X\\]";
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\sqcap";
 	    }
             else if(index == 163){
-                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[\\Psi\\]";
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\Psi";
 	    }
             else if(index == 164){
-                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[\\Phi\\]";
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\Phi";
 	    }
             else if(index == 165){
-                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[N\\]";
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\sqcup";
 	    }
             else if(index == 166){
-                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\[O\\]";
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\dagger";
+	    }
+            else if(index == 171){
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "+";
+	    }
+            else if(index == 172){
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "-";
+	    }
+            else if(index == 173){
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\ast";
+	    }
+            else if(index == 174){
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\star";
+	    }
+            else if(index == 175){
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\oplus";
+	    }
+            else if(index == 176){
+                document.frmkeyboard.txtexpression.value = document.frmkeyboard.txtexpression.value + "\\ominus";
 	    }
         }
  
@@ -637,7 +659,9 @@ function addmultiintegrallimit(n){
     <table border=0 cellspacing=2 cellpadding=4>
 	<tr><td><input id="Button1" type="button" value="epsilon" /></td><td><input id="Button2" type="button" value="leq" /></td><td><input id="Button3" type="button" value="MathT" /></td><td><input id="Button4" type="button" value="MathB" /></td><td><input id="Button5" type="button" value="UpperB" />&nbsp;&nbsp;<input id="Button111" type="button" value="subscriptAlpha" /></td><td><input id="Button6" type="button" value="x squared" /></td></tr>
 <!-- &nbsp;&nbsp;<input id="Button112" type="button" value="in R" /> -->
-        <tr><td><input id="Button7" type="button" value="in set" /></td><td><input id="Button8" type="button" value="subset" /></td><td><input id="Button9" type="button" value="minus-plus" /></td><td><input id="Button10" type="button" value="Sigma (Summation)" /></td><td><input id="Button11" type="button" value="proportionate" /></td><td><input id="Button12" type="button" value="infinity" /></td></tr>
+        <tr><td><input id="Button7" type="button" value="in set" /></td><td><input id="Button8" type="button" value="equivalent" /></td><td><input id="Button9" type="button" value="minus-plus" /></td><td><input id="Button10" type="button" value="Sigma (Summation)" /></td><td><input id="Button11" type="button" value="proportionate" /></td><td><input id="Button12" type="button" value="infinity" /></td></tr>
+
+<tr><td><input id="Button137" type="button" value="perpendicular" /></td><td><input id="Button138" type="button" value="parallel" /></td><td><input id="Button140" type="button" value="similar" /></td><td><input id="Button143" type="button" value="approx" /></td><td><input id="Button146" type="button" value="congruent" /></td><td><input id="Button147" type="button" value="neq" /></td></tr>
 
 <!-- ASCII characters -->
 <tr><td><input id="Button13" type="button" value="A" /></td><td><input id="Button14" type="button" value="B" /></td><td><input id="Button15" type="button" value="C" /></td><td><input id="Button16" type="button" value="D" /></td><td><input id="Button17" type="button" value="E" /></td><td><input id="Button18" type="button" value="F" /></td></tr>
@@ -653,6 +677,7 @@ function addmultiintegrallimit(n){
 <!-- <input id="Button54" type="button" value="p" /> -->
 <tr><td><input id="Button65" type="button" value="0" /></td><td><input id="Button66" type="button" value="1" /></td><td><input id="Button67" type="button" value="2" /></td><td><input id="Button68" type="button" value="3" /></td><td><input id="Button69" type="button" value="4" /></td><td><input id="Button70" type="button" value="5" /></td></tr>
 <tr><td><input id="Button71" type="button" value="6" /></td><td><input id="Button72" type="button" value="7" /></td><td><input id="Button73" type="button" value="8" /></td><td><input id="Button74" type="button" value="9" /></td><td>&nbsp;</td><td>&nbsp;</td></tr>
+<tr><td><input id="Button171" type="button" value="+" /></td><td><input id="Button172" type="button" value="-" /></td><td><input id="Button173" type="button" value="asterisk" /></td><td><input id="Button174" type="button" value="star" /></td><td><input id="Button175" type="button" value="oplus" /></td><td><input id="Button176" type="button" value="ominus" /></td></tr>
 <!-- <input id="Button70" type="button" value="5" /> -->
 
 <!-- Brackets -->
@@ -678,16 +703,13 @@ function addmultiintegrallimit(n){
 
 <!-- Greek Characters - uppercase -->
 <tr><td colspan=6>&nbsp;</td></tr>
-<tr><td><input id="Button137" type="button" value="Alpha" /></td><td><input id="Button138" type="button" value="Beta" /></td><td><input id="Button139" type="button" value="Gamma" /></td><td><input id="Button140" type="button" value="Rho" /></td><td><input id="Button141" type="button" value="Sigma" /></td><td><input id="Button142" type="button" value="Delta" /></td></tr>
+<tr><td><input id="Button141" type="button" value="Sigma" /></td><td><input id="Button142" type="button" value="Delta" /></td><td><input id="Button139" type="button" value="Gamma" /></td><td><input id="Button144" type="button" value="Lambda" /></td><td><input id="Button145" type="button" value="Theta" /></td><td><input id="Button148" type="button" value="Upsilon" /></td></tr>
 
 <tr><td colspan=6>&nbsp;</td></tr>
-<tr><td><input id="Button143" type="button" value="Mu" /></td><td><input id="Button144" type="button" value="Lambda" /></td><td><input id="Button145" type="button" value="Theta" /></td><td><input id="Button146" type="button" value="Kappa" /></td><td><input id="Button147" type="button" value="Iota" /></td><td><input id="Button148" type="button" value="Zeta" /></td></tr>
+<tr><td><input id="Button151" type="button" value="Psi" /></td><td><input id="Button152" type="button" value="Xi" /></td><td><input id="Button153" type="button" value="Phi" /></td><td><input id="Button154" type="button" value="Omega" /></td><td><input id="Button149" type="button" value="Pi" /></td><td>&nbsp;</td></tr>
 
 <tr><td colspan=6>&nbsp;</td></tr>
-<tr><td><input id="Button149" type="button" value="Eta" /></td><td><input id="Button150" type="button" value="Chi" /></td><td><input id="Button151" type="button" value="Psi" /></td><td><input id="Button152" type="button" value="Xi" /></td><td><input id="Button153" type="button" value="Phi" /></td><td><input id="Button154" type="button" value="Omega" /></td></tr>
-
-<tr><td colspan=6>&nbsp;</td></tr>
-<tr><td><input id="Button161" type="button" value="Epsilon" /></td><td><input id="Button162" type="button" value="Pi" /></td><td><input id="Button163" type="button" value="Tau" /></td><td><input id="Button164" type="button" value="Upsilon" /></td><td><input id="Button165" type="button" value="Nu" /></td><td><input id="Button166" type="button" value="O" /></td></tr>
+<tr><td><input id="Button161" type="button" value="Epsilon" /></td><td><input id="Button162" type="button" value="squarecap" /></td><td><input id="Button163" type="button" value="Tau" /></td><td><input id="Button164" type="button" value="Upsilon" /></td><td><input id="Button165" type="button" value="square cup" /></td><td><input id="Button166" type="button" value="dagger" /></td></tr>
 
 <!-- Math Symbols -->
 <tr><td colspan=6>&nbsp;</td></tr>
@@ -711,10 +733,11 @@ function addmultiintegrallimit(n){
 </div>
 <br />
 <input type='button' name='btnconvertstrtomath' value='Convert to Math Expression' onClick='javascript:displayMathExpr();'>
+<!-- <textarea id='mathexpr', name='mathexpr' rows='8' cols='20'></textarea> -->
 </p>
 
-<div id='mathexpr'>
-</div>
+<span id='mathexpr'>
+</span> 
 <div id='testdiv'>
 </div>
 </body>
